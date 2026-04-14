@@ -1,4 +1,22 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+node_modules/
+**/node_modules/
+build/
+.env
+.env.*
+.DS_Store
+.vercel
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/.idea
+/.vscode
+dist/
+coverage/
+.cache
+*.log
+package-lock.json
+/.env.local
+/.env.production# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
