@@ -1,0 +1,42 @@
+# Render Blueprint for Sole Spectrum
+# Deploy via: Render Dashboard → New → Blueprint → Connect this repo
+
+services:
+  # ── Backend API (Express + Node) ──────────────────────────────
+  - type: web
+    name: sole-spectrum-api
+    runtime: node
+    rootDir: sole-spectrum-backend
+    buildCommand: npm install
+    startCommand: node index.js
+    plan: free
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: NODE_ENV
+        value: production
+
+  # ── Frontend (React Static Site) ──────────────────────────────
+  - type: web
+    name: sole-spectrum
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    plan: free
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: REACT_APP_API_URL
+        sync: false
